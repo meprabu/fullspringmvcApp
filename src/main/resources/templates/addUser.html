@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+
+<div th:replace="fragment/header :: header"/>
+
+<div class="container">
+
+
+   
+
+     <!--
+     	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <span sec:authorize="isAuthenticated()"> <h3>The role is<span sec:authentication="principal.authorities"></span></h3> </span>
+        <div sec:authorize="hasRole('ADMIN')">
+  			This content is only shown to administrators.
+		</div> 
+		
+		  <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+	-->
+	
+	<div class="row top-buffer">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="well well-lg">
+					<h3>
+						<b>Bed Count Maintenance Page</b>
+					</h3>
+					<p>Please enter values to add user</p>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	<div class="row">
+	
+	<div class="col-md-2"></div>
+			<div class="col-md-8">
+		  		<form method="post" th:action="@{/user/Adduser}" th:object="${dmhUser}">
+		  		
+		  		<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{who}">UserId</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput" placeholder="userId" th:field="*{who}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{first_name}">first Name</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="first Name" th:field="*{first_name}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{last_name}">Last name</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Last name" th:field="*{last_name}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{email}">Email</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Email" th:field="*{email}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{permit}">Permit</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Permit" th:field="*{permit}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{phone}">Phone</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Phone" th:field="*{phone}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{location_code}">Location Code</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Location Code" th:field="*{location_code}">
+	  			</div>
+	  			<div class="form-group">
+	    			 <label for="formGroupExampleInput" th:errors="*{pswd}">Password</label>
+	    			 <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Password" th:field="*{pswd}">
+	  			</div>
+	  			
+		  		
+		  		<div class="form-group">
+		  		   <input type="submit" value="Submit"/>
+		  		</div>
+		  		
+		  
+		  </form>
+		</div>  
+	</div>	  
+	</div>
+<!-- /.container -->
+<div th:replace="fragment/footer :: footer"/>
+

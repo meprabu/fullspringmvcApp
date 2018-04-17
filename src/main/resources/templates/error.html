@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragment/header :: header"/>
+
+<div class="container">
+
+
+    <div class="starter-template">
+
+     <!--
+     	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <span sec:authorize="isAuthenticated()"> <h3>The role is<span sec:authentication="principal.authorities"></span></h3> </span>
+        <div sec:authorize="hasRole('ADMIN')">
+  			This content is only shown to administrators.
+		</div> 
+		
+		  <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+	-->
+	
+	
+		<div class="row top-buffer">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="well well-lg">
+					<h3>
+						<b>Error!</b>
+					</h3>
+					<p th:text="${errorMsg}"></p>
+					
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		
+		
+    </div>
+
+</div>
+<!-- /.container -->
+<div th:replace="fragment/footer :: footer"/>
+
+</body>
+</html>

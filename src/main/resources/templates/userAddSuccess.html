@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+
+<div th:replace="fragment/header :: header"/>
+
+<div class="container">
+
+<div th:text="${userName}">User Id : </div>
+<div th:text="${First_Name}">First_Name: </div>
+<div th:text="${last_Name}">last_Name : </div>
+
+
+Has been added.
+
+
+</div>
+<!-- /.container -->
+<div th:replace="fragment/footer :: footer"/>

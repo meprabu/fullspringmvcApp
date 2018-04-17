@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragment/header :: header-css" />
+
+</head>
+<body>
+	<script>
+ 	 $(document).ready(function() {
+		
+	 /* 	var fakedata = ['test1','test2','test3','test4','ietsanders'];
+		$("#first_name").autocomplete({source:fakedata});  */
+		
+		
+	/*  $("#first_name").autocomplete({	
+		source: function(request, response) {
+		$.ajax({
+			url: "/user/searchUsers",
+			type: "GET",
+			data: { first_name: request.term },
+			dataType: "json",
+			success: function(data) {
+				console.log(data);
+				response($.map(data, function(v,i){	
+				return {	
+					value: v.first_name,
+					data: v.who
+					};
+			  	}));
+			},
+			error: function(data){
+				console.log( 'ERROR: ', data );
+			}
+		});
+		}
+	}); 	 */
+		
+	
+	
+	  $("#first_name").autocomplete({	
+		source: function(request, response) {
+			$.getJSON("/user/searchUsers?first_name=" + request.term, function(data) {
+ 	 				console.log(data);
+					response($.map(data, function(v,i){	
+						return {	
+						value: v.first_name,
+						data: v.who
+						};
+			  		}));
+				})
+			.fail(function(data) { console.error('Error in autocomplete:' + data) });
+		}
+	}); 
+	
+				
+  });
+  
+  
+  </script>
+
+
+
+
+	<div th:replace="fragment/header :: header" />
+
+	<div class="container">
+		<div class="starter-template"></div>
+
+		 <form class="form-horizontal" id="search-form">
+
+		<div>
+			<label for="employee">First Name: </label>
+			<input type="text" id="first_name" value="" placeholder="First Name"> 
+		</div>
+		<button id="button-id" type="submit" onclick="CallMethod()">Search</button>
+		</form>
+
+	</div>
+	<!-- /.container -->
+	<div th:replace="fragment/footer :: footer" />
+
+</body>
+</html>
