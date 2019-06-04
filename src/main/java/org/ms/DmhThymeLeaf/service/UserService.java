@@ -7,11 +7,11 @@ import java.util.Optional;
 import org.ms.DmhThymeLeaf.entity.DmhUser;
 
 public interface UserService {
-	
+
 	DmhUser getUserById(String email);
-	
+
 	void updateUser(DmhUser dmhuser) throws SQLException;
-	
+
 	Optional<List<DmhUser>> getAllusers();
-	
+
 }

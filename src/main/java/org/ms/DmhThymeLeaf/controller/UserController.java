@@ -50,8 +50,8 @@ public class UserController {
 		//binder.setFieldDefaultPrefix(fieldDefaultPrefix);
 	}
 	
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@Secured("ROLE_USER")
+	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@GetMapping(value= {"/user"})
 	public String getUser(){
 		//System.out.println(principal.getName());
@@ -97,9 +97,7 @@ public class UserController {
 		Optional<List<DmhUser>> dmhuser = userDao.getAllusers();
 		List<DmhUser> list = null;
 		if(dmhuser.map(List::size).filter(s-> s > 0).isPresent()){
-			
 			list = dmhuser.get().stream().filter(s -> !StringUtils.isEmpty(s.getFirst_name())).collect(Collectors.toList());
-			
 			model.addAttribute("allUsersList", list);
 		}
 		return "allUsers";

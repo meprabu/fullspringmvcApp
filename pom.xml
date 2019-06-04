@@ -6,7 +6,7 @@
 	<groupId>org.ms</groupId>
 	<artifactId>DmhThymeLeaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>DmhThymeLeaf</name>
 	<description>Demo project for Spring Boot</description>
@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -38,56 +38,61 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<!-- optional, it brings userful tags to display spring security stuff -->
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-        <groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-validation</artifactId>
-    	</dependency> 
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
-       		 <groupId>com.microsoft.sqlserver</groupId>
-        	<artifactId>sqljdbc4</artifactId>
-        	<version>4.0</version>
-        	<scope>system</scope>
-        	<optional>true</optional>
-       	 	<systemPath> C:/jar/sql/sqljdbc4.jar</systemPath>
-    	</dependency>
-		
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+			<!-- <scope>system</scope>
+			<optional>true</optional>
+			<systemPath> C:/jar/sql/sqljdbc4.jar</systemPath> -->
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		 <!-- hot swapping, disable cache for template, enable live reload -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Optional, for bootstrap -->
-        <dependency>
-   			<groupId>org.webjars</groupId>
-    		<artifactId>bootstrap</artifactId>
-    		<version>4.0.0-2</version>
-		</dependency>
-		
+		<!-- hot swapping, disable cache for template, enable live reload -->
 		<dependency>
-    		<groupId>org.webjars</groupId>
-    		<artifactId>jquery</artifactId>
-    		<version>3.3.1-1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
-		
+
+		<!-- Optional, for bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>3.3.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.3.1-1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -96,11 +101,22 @@
 	</dependencies>
 
 	<build>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			 <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <!-- web.xml is not mandatory since JavaEE 5 -->
+                   <!--  <failOnMissingWebXml>false</failOnMissingWebXml> -->
+                    <warName>DMHWeb</warName>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

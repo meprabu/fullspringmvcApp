@@ -10,7 +10,7 @@
 
         <footer>
         <!-- this is footer -->
-        © 2018 dmh
+        © 2019 dmh
             <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
@@ -19,7 +19,7 @@
              <div sec:authorize="hasRole('USER')">
   				This content is only shown to USERS .
 			</div>
-
+			
         </footer>
     </div>
 

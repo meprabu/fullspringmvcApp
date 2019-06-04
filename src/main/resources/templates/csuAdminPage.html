@@ -1,0 +1,114 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+<script th:inline="javascript">
+var permit = /*[[${#authentication.principal.org}]]*/;
+var locationCodeUrl =  /*[[@{/csu/adminLoadLocation}]]*/; 
+if(permit)
+	permit = permit.trim();
+</script>
+
+<script type="text/javascript" th:src="@{/js/csuAdminPage.js}" ></script>
+
+<div th:replace="fragment/header :: header"/>
+
+<div class="container">
+
+	<form action="#" th:action="@{/csu/submitCsuAdmin}" th:object="${csuForm}" method="post">
+		<div class="row top-buffer">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="well well-lg">
+					<h3>
+						<b>Crisis Stabilization Unit - Licensed/Active Beds</b>
+					</h3>
+					<p>Select a single provider or all providers.  Enter the number of licensed beds and active beds available for each unit/service type and each gender.</p>
+
+					<p>Page is restricted to Administrators.  Providers do not have access to this section.</p>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+			<!-- 	<div id="bsError">
+					 <div class="alert alert-danger fade in">
+			        	<strong>Error!</strong> Please Enter at least one value. 
+			    	</div>
+    			</div> -->
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<table class="table table-bordered">
+					<col></col>
+					<colgroup span="6"></colgroup>
+					<colgroup span="2"></colgroup>
+					<colgroup span="2"></colgroup>
+					<colgroup span="2"></colgroup>
+					<tr>
+						<th colspan="5" align="center">Provider: &nbsp;&nbsp;&nbsp;
+					
+							<div class="dropdown">
+								
+								<select onchange="populateLocations()" id="provider">
+      								<option value="NONE">Select a Provider</option>
+      								<option th:each="entry : ${session.csuAdminProviders.entrySet()}" th:value="${entry.key}" th:text="${entry.value}">
+        								This will be replaced - is only used for natural templating
+      								</option>
+   								</select>
+							</div>
+						</th>
+						<th colspan="4" align="center">Location:
+							<div class="dropdown" id="locationDiv">
+								  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Select a Location
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu" id="dropdown-location">
+								  </ul>
+							</div> 
+						</th>
+					</tr>
+					<tr>
+						<th rowspan="2" align="center">Unit/Service</th>
+						<!--<th colspan="1" rowspan="2" scope="colgroup">Provider</th> -->
+						<th colspan="2" rowspan="2" scope="colgroup">Location</th>
+						<th colspan="2" scope="colgroup" >Licensed Beds</th>
+						<th colspan="2" scope="colgroup">ActiveBeds</th>
+					</tr>
+					<tr>
+						<th scope="col">Male</th>
+						<th scope="col">Female</th>
+						<!-- <th scope="col">CoEd</th> -->
+						<th scope="col">Male</th>
+						<th scope="col">Female</th>
+						<!-- <th scope="col">CoEd</th> -->
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-1"><a th:href="@{/csuHome}" class="btn btn-primary"> <b>Back</b> </a></div>
+			<div class="col-md-5"></div>
+				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
+			<div class="col-md-1"></div>
+		</div>
+		
+   			
+   			<input type="hidden" name="voodoo" id="voodoo"/>
+   		
+   		</form>	
+   </div>
+<div th:replace="fragment/footer :: footer"/>
+ 
+</body>
+</html>

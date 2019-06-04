@@ -3,43 +3,18 @@ package org.ms.DmhThymeLeaf.entity;
 
 import org.hibernate.validator.constraints.Length;
 import org.ms.DmhThymeLeaf.enums.DMHRoles;
+import org.slf4j.Logger;
+
+import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class DmhUser {
+public class DmhUser implements Serializable{
 	
+	//private static final Logger logger =  Logger.(DmhUser.class);
 	
-	
-	
-	
-	
-	public DmhUser(@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String who,
-			@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String first_name,
-			@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String last_name,
-			@NotNull(message = "permit cannot be null") String permit,
-			@NotNull(message = "password cannot be null") String pswd, DMHRoles role) {
-		super();
-		this.who = who;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.permit = permit;
-		this.pswd = pswd;
-		this.role = role;
-	}
-	public DmhUser() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-
-
-
-
-
 	@Size(min=1, max=32, message="First name must be between 1 and 32 characters")
 	public String who;
 	@Size(min=1, max=32, message="First name must be between 1 and 32 characters")
@@ -61,9 +36,27 @@ public class DmhUser {
 	@NotNull
 	@Length(min=10, max=12, message="Enter 10 didgit phone number")
 	public String phone;
+	private String csu;
+	private String cl;
+	private String idd;
 	
 	
-	
+	public DmhUser(@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String who,
+			@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String first_name,
+			@Size(min = 1, max = 32, message = "First name must be between 1 and 32 characters") String last_name,
+			@NotNull(message = "permit cannot be null") String permit,
+			@NotNull(message = "password cannot be null") String pswd, DMHRoles role) {
+		super();
+		this.who = who;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.permit = permit;
+		this.pswd = pswd;
+		this.role = role;
+	}
+	public DmhUser() {
+		super();
+	}
 	
 	public String getWho() {
 		return who;
@@ -132,7 +125,24 @@ public class DmhUser {
 		this.phone = phone;
 	}
 	
-	
+	public String getCsu() {
+		return csu;
+	}
+	public void setCsu(String csu) {
+		this.csu = csu;
+	}
+	public String getCl() {
+		return cl;
+	}
+	public void setCl(String cl) {
+		this.cl = cl;
+	}
+	public String getIdd() {
+		return idd;
+	}
+	public void setIdd(String idd) {
+		this.idd = idd;
+	}
 	
 	
 	

@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragment/header :: header-css" />
+</head>
+<body>
+	<script th:inline="javascript">
+var permit = /*[[${#authentication.principal.org}]]*/;
+if(permit)
+	permit = permit.trim();
+</script>
+
+
+
+	<div th:replace="fragment/header :: header" />
+
+	<div class="container">
+
+		<form action="#" th:action="@{/csu/submitCsuAdmin}"
+			th:object="${csuForm}" method="post">
+			<div class="row top-buffer">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="well well-lg">
+						<h3>
+							<b>Crisis Stabilization Unit - Occupied Beds</b>
+						</h3>
+						<p>Enter the number of occupied beds for each unit/service
+							type and each gender.</p>
+
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<!-- 	<div id="bsError">
+					 <div class="alert alert-danger fade in">
+			        	<strong>Error!</strong> Please Enter at least one value. 
+			    	</div>
+    			</div> -->
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<table>
+						<th><div>
+								Date of last update: <b id="PrevDate"></b>
+							</div></th>
+					</table>
+					<table class="table table-bordered">
+						<tr>
+							<th colspan="6" align="center">Occupied Bed</th>
+						</tr>
+						<tr>
+							<th scope="col">Unit/Service</th>
+							<th scope="col"><div align="center">Male</div></th>
+							<th scope="col"><div align="center">Female</div></th>
+							<!-- <th scope="col"  ><div align="center">CoEd</div></th> -->
+							<th scope="col"><div align="center">
+									Pend <br> Adm
+								</div></th>
+							<th scope="col"><div align="center">
+									Pend <br> Dis
+								</div></th>
+						</tr>
+						<tr>
+							<th scope="row" nowrap align="left"><div id="prevBedType">
+								</div></th>
+							<td align="center"><input type="text" size="2" maxlength="4"
+								onkeyup="checkNumbers(event, this);" disabled="disabled"
+								id="prevMale" /></td>
+							<td align="center"><input type="text" size="2" maxlength="4"
+								onkeyup="checkNumbers(event, this);" disabled="disabled"
+								id="prevFemale" /></td>
+							<!-- <td align="center"><input type="text" size="2" maxlength="4" onkeyup="checkNumbers(event, this);"  disabled="disabled" id="prevCoed"/></td> -->
+							<td align="center"><input type="text" size="2" maxlength="4"
+								onkeyup="checkNumbers(event, this);" disabled="disabled"
+								id="prevPendAdm" /></td>
+							<td align="center"><input type="text" size="2" maxlength="4"
+								onkeyup="checkNumbers(event, this);" disabled="disabled"
+								id="prevPendDis" /></td>
+						</tr>
+
+					</table>
+
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<table>
+						<th><div>
+								Date: <b id="date"></b>
+							</div></th>
+					</table>
+					<table class="table table-bordered">
+						<col></col>
+						<colgroup span="6"></colgroup>
+						<colgroup span="2"></colgroup>
+						<colgroup span="2"></colgroup>
+						<colgroup span="2"></colgroup>
+						<tr>
+							<th colspan="4" align="center"><div id="providerName"></div>
+								<div class="dropdown" id="provider-dropdown">
+									<button class="btn btn-default dropdown-toggle"
+										id="providerButton" type="button" data-toggle="dropdown">
+										Select 1 or All Providers <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" id="dropdown-prov">
+
+									</ul>
+								</div></th>
+							<th colspan="5" align="center"><div id="locationName"></div>
+								<div class="dropdown" id="location-dropdown">
+									<button class="btn btn-default dropdown-toggle"
+										id="providerButton" type="button" data-toggle="dropdown">
+										Select 1 Location <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" id="dropdown-loc">
+
+									</ul>
+								</div></th>
+						</tr>
+						<tr>
+							<th rowspan="2" align="center">Unit/Service</th>
+							<th rowspan="2" colspan="3" scope="colgroup">Total
+								Certified Beds</th>
+							<th colspan="5" scope="colgroup" align="center">Occupied
+								Beds</th>
+						</tr>
+						<tr>
+							<!-- <th scope="col" width="5px">Male</th>
+							 <th scope="col"  width="5px">Female</th>
+							 <th scope="col"  width="5px">CoEd</th> 
+						-->
+							<th scope="col" width="5px">Male</th>
+							<th scope="col" width="5px">Female</th>
+							<!-- <th scope="col"  width="5px">CoEd</th> -->
+							<th scope="col" width="5px">Pend <br> Adm
+							</th>
+							<th scope="col" width="5px">Pend <br> Dis
+							</th>
+						</tr>
+						<tr id="occupiedValues">
+							<th scope="row" nowrap align="left"><div id="facility"></div></th>
+							<td colspan="3" align="center"><input type="text" size="1"
+								maxlength="4" onkeyup="checkNumbers(event, this);"
+								id="totalCertified" disabled="disabled" /></td>
+							<!-- 
+							 <td><input type="text" size="1"  maxlength="4" onkeyup="checkNumbers(event, this);" id="adultLicMale" /></td>
+							 <td><input type="text" size="1" maxlength="4" onkeyup="checkNumbers(event, this);" id="adultLicFemale" /></td>
+							 <td><input type="text" size="1" maxlength="4" onkeyup="checkNumbers(event, this);" id="adultLicCoed" /></td> 
+						-->
+							<td><input type="text" size="1" maxlength="4"
+								onkeyup="checkNumbers(event, this);" class="occu" id="occuMale" /></td>
+							<td><input type="text" size="1" maxlength="4"
+								onkeyup="checkNumbers(event, this);" class="occu"
+								id="occuFemale" /></td>
+							<!--  	<td><input type="text" size="1" maxlength="4" onkeyup="checkNumbers(event, this);" class="occu" id="occuCoed"/></td> -->
+							<td><input type="text" size="1" maxlength="4"
+								onkeyup="checkNumbers(event, this);" class="occu"
+								id="occuPendAdm" /></td>
+							<td><input type="text" size="1" maxlength="4"
+								onkeyup="checkNumbers(event, this);" class="occu"
+								id="occuPendDis" /></td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-2"></div>
+
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-1">
+					<a href="BCMaintenance.jsp" class="btn btn-primary"> <b>Back</b>
+					</a>
+				</div>
+				<div class="col-md-4" align="left">
+					<!-- 
+				<input type="checkbox" id="checkbox" name="checkbox" value="Y" onclick="checkboxClick()">
+    			<label for="checkbox">Submit only Active Beds</label> -->
+				</div>
+				<div class="col-md-3" align="right">
+					<html:submit property="submit" styleId="submit" value="Submit"
+						styleClass="btn btn-primary" />
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-1">
+					<a th:href="@{/csuHome}" class="btn btn-primary"> <b>Back</b>
+					</a>
+				</div>
+				<div class="col-md-5"></div>
+				<button type="submit" class="btn btn-primary" id="submit">Submit</button>
+				<div class="col-md-1"></div>
+			</div>
+
+
+			<input type="hidden" name="voodoo" id="voodoo" />
+
+		</form>
+	</div>
+	<div th:replace="fragment/footer :: footer" />
+
+</body>
+</html>

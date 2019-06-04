@@ -12,8 +12,9 @@
 
     <div class="starter-template">
 	
+	
 		<div class="row top-buffer">
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 			<div class="col-md-8">
 				<div class="well well-lg">
 					<h3>
@@ -28,32 +29,28 @@
 			<div class="col-md-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 			<div class="col-md-4">
 				<ul class="list-group">
 					<div sec:authorize="hasRole('ADMIN')">
-						<a href="bedCountAdminLoad.do" class="list-group-item"
+						<a th:href="@{/csu/adminLoad}" class="list-group-item"
 							data-toggle="tooltip"
 							title=" Administrators maintain the number of licensed beds and the number of active beds.">
 							<b>BC Licensed/Active Beds </b>
 						</a>
 					</div>
-					<div sec:authorize="hasRole('USER')">
-						<a th:href="@{/user/getAllUsers}" class="list-group-item"
+					<div sec:authorize="hasAnyRole('USER','ADMIN')">
+						<a th:href="@{/csu/csuUsers}" class="list-group-item"
 							data-toggle="tooltip"
-							title=""><b> See All Users</b></a>
-						</div>	
-					<div sec:authorize="isAuthenticated()">		
+							title=""><b> Occupied Beds</b></a>
+					</div>	
+					<!-- <div sec:authorize="isAuthenticated()">	 -->	
+					 <div sec:authorize="isAuthenticated()">
 						<a th:href="@{/user/Adduser}" class="list-group-item"
 							data-toggle="tooltip"
-							title=""><b>Add User</b>
+							title=""><b>Reports</b>
 						</a>
 					</div>
-					<div sec:authorize="hasRole('USER')">
-						<a th:href="@{/user/getSearchUsers}" class="list-group-item"
-							data-toggle="tooltip"
-							title=""><b>Search User</b>
-						</a>
 					
 				
 				</ul>

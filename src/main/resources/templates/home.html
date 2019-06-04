@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragment/header :: header"/>
+
+<div class="container">
+
+
+    <div class="starter-template">
+	
+		<div class="row top-buffer">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+				<div class="well well-lg">
+					<h3>
+						<b>MS Department Of Mental Health Bed Registry</b>
+					</h3>
+					<p>This site is authorized for use by Mental Health service providers and Department of Mental Health personnel only.
+					<br>Please click on a Facility form the below list or from Navigation Menu at the top.</p>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-4">
+				<ul class="list-group">
+					 <div sec:authorize="hasRole('ADMIN')">
+						<a th:href="@{/csuHome}" class="list-group-item"
+							data-toggle="tooltip"
+							title=" Crisis Stabilization Unit ">
+							<b>Crisis Stabilization Unit </b>
+						</a>
+					</div>
+					 <div sec:authorize="hasRole('ADMIN')">
+						<a th:href="@{/user/getAllUsers}" class="list-group-item"
+							data-toggle="tooltip"
+							title=""><b>Community Living</b></a>
+					</div>	
+					 <div sec:authorize="hasRole('ADMIN')">
+						<a th:href="@{/user/Adduser}" class="list-group-item"
+							data-toggle="tooltip"
+							title=""><b>IDD Program Crisis Beds</b>
+						</a>
+					</div>	
+				</ul>
+			</div>
+			
+			<div class="col-md-1"></div>
+
+		</div>
+	
+	
+	
+	
+      
+
+    </div>
+
+</div>
+<!-- /.container -->
+<div th:replace="fragment/footer :: footer"/>
+
+</body>
+</html>
